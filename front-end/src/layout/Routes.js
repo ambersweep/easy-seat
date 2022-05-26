@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
@@ -14,6 +14,7 @@ import NewReservation from "../Reservations/NewReservation";
  * @returns {JSX.Element}
  */
 function Routes() {
+  const [date, setDate] = useState(today());
   return (
     <Switch>
       {/* Home Page */}
@@ -27,7 +28,7 @@ function Routes() {
         <NewReservation />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={today()} />
+        <Dashboard date={date} setDate={setDate} />
       </Route>
       <Route>
         <NotFound />
