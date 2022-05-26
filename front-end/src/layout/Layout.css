@@ -2,3 +2,16 @@
   background-color: #393a44;
   min-width: 200px;
 }
+
+body {
+background-color: whitesmoke;
+}
+
+nav{
+  background-color: darkslateblue;
+}
+
+.purple{
+  background-color:  rgb(90, 80, 161);
+  color: white;
+}
