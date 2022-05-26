@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
+import ErrorAlert from "../layout/ErrorAlert";
 
 export default function NewReservation() {
   const initial = {
@@ -76,8 +77,11 @@ export default function NewReservation() {
   }
   return (
     <div>
+     <ErrorAlert error={showError} />
+
       <div className="container fluid text-center">
-        <h3 className="my-3 font-monospace">Create New Reservation</h3>
+        <h3 className="my-3 font-monospace">Create A New Reservation</h3>
+        <hr />
       </div>
       <div className="container fluid">
         <ReservationForm

@@ -15,10 +15,10 @@ function Layout() {
   return (
     <div>
       <div className="row-md-2">
-        <div className="col">
+        <div>
       <Menu/>
         </div>
-        <div className="col">
+        <div>
           <Routes />
         </div>
       </div>

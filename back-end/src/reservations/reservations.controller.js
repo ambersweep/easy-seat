@@ -7,6 +7,11 @@ async function list(req, res) {
   });
 }
 
+function read(req, res) {
+  res.json({data: res.locals.reservation})
+}
+
 module.exports = {
   list,
+  read,
 };

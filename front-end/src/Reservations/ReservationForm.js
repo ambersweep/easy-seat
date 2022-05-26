@@ -109,15 +109,17 @@ export default function ReservationForm({
             ></input>
           </div>
         </div>
-        <div className="mt-2 text-center">
-          <button type="submit" className="btn btn-primary">
-            Submit
+        <div className="mt-2">
+          <button type="submit" className="btn btn-primary m-2">
+          <i class="bi bi-check-lg"></i>
+          &nbsp;Submit
           </button>
           <button
-            className="btn btn-secondary ml-2"
+            className="btn btn-secondary m-2"
             onClick={() => history.goBack()}
           >
-            Cancel
+            <i class="bi bi-x-lg"></i>
+            &nbsp;Cancel
           </button>
         </div>
       </form>
