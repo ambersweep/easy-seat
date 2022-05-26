@@ -77,7 +77,7 @@ function Dashboard({ date, setDate }) {
       <ErrorAlert error={reservationsError} />
       </div>
       <div className="text-center">
-      {JSON.stringify(reservations)}
+      {reservations.length ? JSON.stringify(reservations) : <p className="lead">There are no Reservations Today</p>}
       </div>
     </main>
   );

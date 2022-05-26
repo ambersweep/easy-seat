@@ -24,8 +24,8 @@ function Menu() {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav">
-          <li className="nav-item active">
-            <Link className="nav-link  white-text" to="/dashboard">
+          <li className="nav-item">
+            <Link className="nav-link active" to="/dashboard">
               <i class="bi bi-speedometer2"></i>
               &nbsp;Dashboard
             </Link>
@@ -37,9 +37,15 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link green-text" to="/tables/new">
+            <Link className="nav-link" to="/tables/new">
               <i class="bi bi-plus-lg"></i>
               &nbsp;New Table
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/search">
+              <i class="bi bi-search"></i>
+              &nbsp;Search
             </Link>
           </li>
         </ul>
