@@ -77,7 +77,9 @@ export default function NewReservation() {
   }
   return (
     <div>
+      <div className="container p-2">
      <ErrorAlert error={showError} />
+     </div>
 
       <div className="container fluid text-center">
         <h3 className="my-3 font-monospace">Create A New Reservation</h3>

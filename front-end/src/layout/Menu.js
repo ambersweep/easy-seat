@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav class="navbar navbar-dark main-navbar navbar-expand-md">
+    <nav class="navbar navbar-dark main-navbar navbar-expand-md sticky-top">
       <a className="navbar-brand logo white-text" href="/">
         <b>Periodic Tables</b>
       </a>
