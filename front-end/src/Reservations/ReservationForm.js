@@ -47,7 +47,7 @@ export default function ReservationForm({
         <div className="row g-3 p-2">
           <div className="col">
             <label for="mobile_number" class="form-label">
-              Mobile Number:
+              Phone Number:
             </label>
             <input
               type="text"
