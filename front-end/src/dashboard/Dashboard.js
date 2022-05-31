@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom"
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { listReservations } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
-import useQuery from "../utils/useQuery"
+import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
-
-
+import ReservationCard from "../Reservations/ReservationCard";
 
 /**
  * Defines the dashboard page.
@@ -20,7 +19,6 @@ function Dashboard({ date, setDate }) {
   const history = useHistory();
   const query = useQuery();
   const route = useRouteMatch();
-  const reservation = JSON.stringify(reservations)
 
   useEffect(loadDashboard, [date]);
 
@@ -40,7 +38,7 @@ function Dashboard({ date, setDate }) {
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
-    listReservations({date}, abortController.signal)
+    listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
     return () => abortController.abort();
@@ -49,17 +47,19 @@ function Dashboard({ date, setDate }) {
   return (
     <main>
       <h2 className="text-center mt-4">Dashboard</h2>
-      <div className="container"><hr/></div>
-    
+      <div className="container">
+        <hr />
+      </div>
+
       <div className="text-center mb-3">
         <h4>Reservations for {date}</h4>
       </div>
       <div className="container text-center mb-2">
-      <button
+        <button
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${previous(date)}`)}
         >
-        <i class="bi bi-arrow-left"></i>
+          <i class="bi bi-arrow-left"></i>
         </button>
         <button
           className="btn btn-primary m-2"
@@ -71,15 +71,14 @@ function Dashboard({ date, setDate }) {
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${next(date)}`)}
         >
-         <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right"></i>
         </button>
-        </div>
+      </div>
       <div className="container">
-      <ErrorAlert error={reservationsError} />
+        <ErrorAlert error={reservationsError} />
       </div>
-      <div className="text-center">
-        {reservation}
-      </div>
+      <ReservationCard reservations={reservations} />
+      <br />
     </main>
   );
 }
