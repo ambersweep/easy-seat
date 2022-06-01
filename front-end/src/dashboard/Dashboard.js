@@ -4,7 +4,7 @@ import { listReservations } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
-import ReservationCard from "../Reservations/ReservationCard";
+import ListReservations from "../Reservations/ListReservations";
 
 /**
  * Defines the dashboard page.
@@ -50,10 +50,6 @@ function Dashboard({ date, setDate }) {
       <div className="container">
         <hr />
       </div>
-
-      <div className="text-center mb-3">
-        <h4>Reservations for {date}</h4>
-      </div>
       <div className="container text-center mb-2">
         <button
           className="btn btn-secondary m-2"
@@ -74,11 +70,20 @@ function Dashboard({ date, setDate }) {
           <i class="bi bi-arrow-right"></i>
         </button>
       </div>
+      <div className="text-center mb-3">
+        <br />
+        <h4>Reservations for {date}</h4>
+      </div>
       <div className="container">
         <ErrorAlert error={reservationsError} />
       </div>
-      <ReservationCard reservations={reservations} />
+      <div>
+      <ListReservations reservations = {reservations} />
+      </div>
       <br />
+      <div className="text-center mb-3">
+        <h4>Tables</h4>
+      </div>
     </main>
   );
 }

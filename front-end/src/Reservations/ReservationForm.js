@@ -50,14 +50,15 @@ export default function ReservationForm({
               Phone Number:
             </label>
             <input
-              type="text"
+              type="tel"
               name="mobile_number"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               id="mobile_number"
               className="form-control"
               value={form["mobile_number"]}
               onChange={changeHandler}
               required
-              placeholder="XXX-XXX-XXXX"
+              placeholder="000-000-0000"
               aria-label="Mobile Number"
             ></input>
           </div>
