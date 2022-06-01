@@ -5,7 +5,6 @@ import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
 import NewReservation from "../Reservations/NewReservation";
-import TableForm from "../Tables/TableForm";
 import NewTable from "../Tables/NewTable"
 /**
  * Defines all the routes for the application.

@@ -1,7 +1,7 @@
 const knex = require("../db/connection");
 
-async function read(table_id) {
-    return knex(table).select("*").where({ table_id }).first();
+async function read(tableId) {
+    return knex(table).select("*").where({ table_id: tableId }).first();
   }
 
 function list() {

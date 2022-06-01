@@ -14,7 +14,7 @@ export default function ReservationCard({ reservations }) {
 
   if (reservations) {
     return (
-      <div class="card container mb-2">
+      <div class="card mb-2">
         <div class="card-body text-center">
           <p class="card-text">{status}</p>
           <p class="card-text">

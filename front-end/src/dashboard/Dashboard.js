@@ -75,20 +75,19 @@ function Dashboard({ date, setDate }) {
         </button>
       </div>
       <div className="text-center mb-3">
-        <br />
         <h4>Reservations for {date}</h4>
       </div>
       <div className="container">
         <ErrorAlert error={reservationsError} />
       </div>
-      <div>
+      <div className="container">
         <ListReservations reservations={reservations} />
       </div>
       <br />
       <div className="text-center mb-3">
         <h4>Tables</h4>
       </div>
-      <div className="text-center">
+      <div className="container text-center">
         <TableList tables={tables} />
       </div>
     </main>
