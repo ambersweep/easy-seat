@@ -12,7 +12,6 @@ async function read(reservation_id) {
   return knex(table).select("*").where({ reservation_id }).first();
 }
 
-
 async function listByDate(reservation_date) {
   return knex(table)
     .select("*")
