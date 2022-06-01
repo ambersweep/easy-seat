@@ -1,5 +1,9 @@
 const knex = require("../db/connection");
 
+async function read(table_id) {
+    return knex(table).select("*").where({ table_id }).first();
+  }
+
 function list() {
     return knex("tables").select("*").orderBy("table_name");
 }
@@ -38,6 +42,7 @@ function changeStatus(reservation_id, newStatus) {
 }
 
 module.exports = {
+    read,
     list,
     create,
     update,

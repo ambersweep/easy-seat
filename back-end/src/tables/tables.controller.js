@@ -14,6 +14,9 @@ async function create(req, res) {
     res.status(201).json({ data });
 }
 
+function read(req, res) {
+    res.json({ data: res.locals.table });
+  }
 
 async function update(req, res) {
     const { tableId } = req.params;
@@ -53,7 +56,6 @@ function requestHasBody(req, res, next) {
     next();
 }
 
-//in progress
 async function tableHasEnoughSeats(req, res, next) {
     const { tableId } = req.params;
     const reservation_id = res.locals.reservation.reservation_id
@@ -146,6 +148,7 @@ function reservationIsBooked(req, res, next) {
 }
 
 module.exports = {
+    read: [asyncErrorBoundary(tableExists), read],
     list: asyncErrorBoundary(list),
     create: [
         hasRequiredProperties,
