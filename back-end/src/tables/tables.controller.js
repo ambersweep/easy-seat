@@ -14,7 +14,7 @@ async function create(req, res) {
     res.status(201).json({ data });
 }
 
-//in progress
+
 async function update(req, res) {
     const { tableId } = req.params;
     const data = await service.update(

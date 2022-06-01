@@ -23,8 +23,8 @@ export default function ReservationCard({ reservations }) {
           <p class="card-text">Mobile: {mobile_number}</p>
           <p class="card-text">Party Size: {people}</p>
           <p class="card-text">
-            {reservation_date + " at"}
-            {reservation_time}
+            Reservation Time:
+            {" " + reservation_time}
           </p>
           <button href="#" class="btn btn-primary m-2">
             Seat
@@ -33,7 +33,7 @@ export default function ReservationCard({ reservations }) {
             Edit
           </button>
           <button href="#" class="btn btn-danger m-2">
-            Delete
+            Cancel
           </button>
         </div>
       </div>
