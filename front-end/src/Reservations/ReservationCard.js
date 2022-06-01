@@ -26,7 +26,7 @@ export default function ReservationCard({ reservations }) {
             Reservation Time:
             {" " + reservation_time}
           </p>
-          <button href="#" class="btn btn-primary m-2">
+          <button href={`/reservations/${reservation_id}/seat`} class="btn btn-primary m-2">
             Seat
           </button>
           <button href="#" class="btn btn-secondary m-2">

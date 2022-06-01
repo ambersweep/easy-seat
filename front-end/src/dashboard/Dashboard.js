@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import { listReservations } from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import ListReservations from "../Reservations/ListReservations";
+import TableList from "../Tables/TableList";
 
 /**
  * Defines the dashboard page.
@@ -14,7 +15,9 @@ import ListReservations from "../Reservations/ListReservations";
  */
 function Dashboard({ date, setDate }) {
   const [reservations, setReservations] = useState([]);
+  const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const [tablesError, setTablesError] = useState(null);
 
   const history = useHistory();
   const query = useQuery();
@@ -41,6 +44,7 @@ function Dashboard({ date, setDate }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    listTables(abortController.signal).then(setTables).catch(setTablesError);
     return () => abortController.abort();
   }
 
@@ -78,11 +82,14 @@ function Dashboard({ date, setDate }) {
         <ErrorAlert error={reservationsError} />
       </div>
       <div>
-      <ListReservations reservations = {reservations} />
+        <ListReservations reservations={reservations} />
       </div>
       <br />
       <div className="text-center mb-3">
         <h4>Tables</h4>
+      </div>
+      <div className="text-center">
+        <TableList tables={tables} />
       </div>
     </main>
   );

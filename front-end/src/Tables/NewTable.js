@@ -9,7 +9,7 @@ export default function NewReservation() {
     table_name: "",
     capacity: 0,
   };
-  const [form, setForm] = useState({ ...initial });
+  const [form, setForm] = useState(initial);
   const [showError, setShowError] = useState(false);
   const abortController = new AbortController();
   const history = useHistory();
