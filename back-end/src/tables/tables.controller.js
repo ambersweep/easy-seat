@@ -27,6 +27,8 @@ async function update(req, res) {
   res.status(200).json({ data });
 }
 
+
+//VALIDATION: 
 function hasProperNameAndCapacity(req, res, next) {
   const { table_name, capacity } = req.body.data;
   if (table_name.length < 2) {
