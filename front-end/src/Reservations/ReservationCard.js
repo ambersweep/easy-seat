@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ReservationCard({ reservations }) {
+export default function ReservationCard({ reservation }) {
   const {
     first_name,
     last_name,
@@ -9,20 +9,27 @@ export default function ReservationCard({ reservations }) {
     reservation_time,
     status,
     mobile_number,
-  } = reservations;
+  } = reservation;
 
   async function cancelHandler(event){
     event.preventDefault()
       console.log("Pressed confirm")
   }
 
+ const seatButton = (
+  <a
+  className="btn btn-primary m-2"
+  href={`/reservations/${reservation_id}/seat`}
+>
+  Seat
+</a>
+ )
 
-
-  if (reservations) {
+  if (reservation) {
     return (
       <div class="card mb-2">
         <div class="card-body text-center">
-          <p class="card-text">{status}</p>
+          <p class="card-text" data-reservation-id-status={reservation.reservation_id}>{status}</p>
           <p class="card-text">
             Name: {first_name} {last_name}
           </p>
@@ -32,12 +39,7 @@ export default function ReservationCard({ reservations }) {
             Reservation Time:
             {" " + reservation_time}
           </p>
-          <a
-            className="btn btn-primary m-2"
-            href={`/reservations/${reservation_id}/seat`}
-          >
-            Seat
-          </a>
+          {status !== "seated" ? seatButton : null}
           <a
             className="btn btn-secondary m-2"
             href={`/reservations/${reservation_id}/edit`}
