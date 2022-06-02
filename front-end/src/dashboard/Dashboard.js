@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom"
-import { listReservations } from "../utils/api";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import { listReservations, listTables } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
-import useQuery from "../utils/useQuery"
+import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
-import ViewReservation from "../Reservations/ViewReservation";
-
+import ListReservations from "../Reservations/ListReservations";
+import TableList from "../Tables/TableList";
 
 /**
  * Defines the dashboard page.
@@ -15,7 +15,9 @@ import ViewReservation from "../Reservations/ViewReservation";
  */
 function Dashboard({ date, setDate }) {
   const [reservations, setReservations] = useState([]);
+  const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const [tablesError, setTablesError] = useState(null);
 
   const history = useHistory();
   const query = useQuery();
@@ -39,26 +41,25 @@ function Dashboard({ date, setDate }) {
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
-    listReservations({date}, abortController.signal)
+    listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    listTables(abortController.signal).then(setTables).catch(setTablesError);
     return () => abortController.abort();
   }
 
   return (
     <main>
-      <h1 className="text-center mt-4">Dashboard</h1>
-      <div className="container"><hr/></div>
-    
-      <div className="text-center mb-3">
-        <h4>Reservations for {date}</h4>
+      <h2 className="text-center mt-4">Dashboard</h2>
+      <div className="container">
+        <hr />
       </div>
       <div className="container text-center mb-2">
-      <button
+        <button
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${previous(date)}`)}
         >
-        <i class="bi bi-arrow-left"></i>
+          <i class="bi bi-arrow-left"></i>
         </button>
         <button
           className="btn btn-primary m-2"
@@ -70,14 +71,24 @@ function Dashboard({ date, setDate }) {
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${next(date)}`)}
         >
-         <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right"></i>
         </button>
-        </div>
-      <div className="container">
-      <ErrorAlert error={reservationsError} />
       </div>
-      <div className="text-center">
-      {reservations.length ? JSON.stringify(reservations) : <p className="lead">There are no Reservations Today</p>}
+      <div className="text-center mb-3">
+        <h4>Reservations for {date}</h4>
+      </div>
+      <div className="container">
+        <ErrorAlert error={reservationsError} />
+      </div>
+      <div className="container">
+        <ListReservations reservations={reservations} />
+      </div>
+      <br />
+      <div className="text-center mb-3">
+        <h4>Tables</h4>
+      </div>
+      <div className="container text-center">
+        <TableList tables={tables} />
       </div>
     </main>
   );
