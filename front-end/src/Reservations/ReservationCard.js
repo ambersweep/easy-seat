@@ -20,7 +20,7 @@ export default function ReservationCard({ reservations }) {
 
   if (reservations) {
     return (
-      <div class={status === "seated" ? "d-none" : "card mb-2"}>
+      <div class="card mb-2">
         <div class="card-body text-center">
           <p class="card-text">{status}</p>
           <p class="card-text">
@@ -53,10 +53,10 @@ export default function ReservationCard({ reservations }) {
         </div>
 
       {/* Confirmation modal for cancelling reservation */}
-        <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+        <div className="modal fade" id="cancelModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Cancel Reservation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -66,8 +66,8 @@ export default function ReservationCard({ reservations }) {
        Are you sure you would like to cancel this reservation?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick={cancelHandler} data-dismiss="modal">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" onClick={cancelHandler} data-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

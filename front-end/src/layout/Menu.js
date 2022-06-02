@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav class="navbar navbar-dark main-navbar navbar-expand-md sticky-top shadow">
+    <nav className="navbar navbar-dark main-navbar navbar-expand-md sticky-top shadow">
       <a className="navbar-brand white-text" href="/">
         <b>Periodic Tables</b>
       </a>
@@ -26,25 +26,25 @@ function Menu() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link active" to="/dashboard">
-              <i class="bi bi-speedometer2"></i>
+              <i classNane="bi bi-speedometer2"></i>
               &nbsp;Dashboard
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/reservations/new">
-              <i class="bi bi-plus-lg"></i>
+              <i className="bi bi-plus-lg"></i>
               &nbsp;New Reservation
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/tables/new">
-              <i class="bi bi-plus-lg"></i>
+              <i className="bi bi-plus-lg"></i>
               &nbsp;New Table
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/search">
-              <i class="bi bi-search"></i>
+              <i className="bi bi-search"></i>
               &nbsp;Search
             </Link>
           </li>

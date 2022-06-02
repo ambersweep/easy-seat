@@ -51,7 +51,7 @@ export default function TableForm({
             &nbsp;Cancel
           </button>
           <button type="submit" className="btn btn-primary m-2">
-            <i class="bi bi-check-lg"></i>
+            <i className="bi bi-check-lg"></i>
             &nbsp;Submit
           </button>
         </div>
