@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { listTables, readReservation } from "../utils/api";
 import { useHistory, useParams } from "react-router";
 import { seatReservation } from "../utils/api";
+import ErrorAlert from "../layout/ErrorAlert";
 
 export default function SeatTable() {
   const initialForm = { table_id: "" };
   const [form, setForm] = useState(initialForm);
   const [tables, setTables] = useState([]);
   const [reservations, setReservations] = useState([]);
+  const [showError, setShowError] = useState(null);
   const { reservation_id } = useParams();
   const history = useHistory();
 
@@ -20,7 +22,7 @@ export default function SeatTable() {
         const response = await listTables(abort.signal);
         setTables(response);
       } catch (error) {
-        if (error.name !== "AbortError") console.log(error);
+        if (error.name !== "AbortError") setShowError(error);
       }
     }
 
@@ -30,7 +32,7 @@ export default function SeatTable() {
         const response = await readReservation(reservation_id, abort.signal);
         setReservations(response);
       } catch (error) {
-        if (error.name !== "AbortError") console.log(error);
+        if (error.name !== "AbortError") setShowError(error);
       }
     }
 
@@ -41,9 +43,9 @@ export default function SeatTable() {
   }, [reservation_id]);
 
   const tableSelection = tables.map((table) => {
-    const disabled = Number(reservations.people) > parseInt(table.capacity);
+    const disabled = Number(table.capacity) < Number(reservations.people);
     return (
-      <option key={table.table_id} value={table.table_id} disabled={disabled}>
+      <option key={table.table_id} value={table.table_id} disabled={Number(table.capacity) < Number(reservations.people) ? true : false}>
         {table.table_name} - {table.capacity}
       </option>
     );
@@ -64,7 +66,7 @@ export default function SeatTable() {
       await seatReservation(reservation, table_id, abort.signal);
       history.push("/");
     } catch (error) {
-      if (error.name !== "AbortError") console.log(error);
+      if (error.name !== "AbortError") setShowError(error);
     }
 
     return () => abort.abort();
@@ -72,6 +74,7 @@ export default function SeatTable() {
 
   return (
     <div className="container">
+       <ErrorAlert error={showError} />
       <br />
       <h3 className="my-3 font-monospace text-center">Seat Table</h3>
       <hr />

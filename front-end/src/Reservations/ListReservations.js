@@ -4,7 +4,7 @@ import ReservationCard from "./ReservationCard";
 export default function ListReservations({ reservations }) {
   let reservationsList = reservations.map((reservation) => (
     <ReservationCard
-      reservations={reservation}
+      reservation={reservation}
       key={reservation.reservation_id}
     />
   ));
