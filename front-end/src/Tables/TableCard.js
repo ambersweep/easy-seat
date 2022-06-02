@@ -12,7 +12,7 @@ export default function ReservationCard({ table }) {
           <p className="card-text" data-table-id-status={table.table_id}>
           Status: {reservation_id ? "Occupied" : "Free"}
         </p>
-          <button className="btn btn-primary">Finish</button>
+          <button className={reservation_id ? "btn btn-primary" : "d-none"}>Finish</button>
         </div>
       </div>
     );

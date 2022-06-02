@@ -20,7 +20,7 @@ export default function ReservationCard({ reservations }) {
 
   if (reservations) {
     return (
-      <div class="card mb-2">
+      <div class={status === "seated" ? "d-none" : "card mb-2"}>
         <div class="card-body text-center">
           <p class="card-text">{status}</p>
           <p class="card-text">
@@ -52,6 +52,7 @@ export default function ReservationCard({ reservations }) {
           </button>
         </div>
 
+      {/* Confirmation modal for cancelling reservation */}
         <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
