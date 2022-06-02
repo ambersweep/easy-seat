@@ -7,7 +7,6 @@ export default function ReservationCard({ reservations }) {
     people,
     reservation_id,
     reservation_time,
-    reservation_date,
     status,
     mobile_number,
   } = reservations;
