@@ -17,7 +17,6 @@ function Dashboard({ date, setDate }) {
   const [reservations, setReservations] = useState([]);
   const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
-  const [tablesError, setTablesError] = useState(null);
 
   const history = useHistory();
   const query = useQuery();
@@ -44,7 +43,7 @@ function Dashboard({ date, setDate }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    listTables(abortController.signal).then(setTables)
     return () => abortController.abort();
   }
 
@@ -59,7 +58,7 @@ function Dashboard({ date, setDate }) {
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${previous(date)}`)}
         >
-          <i class="bi bi-arrow-left"></i>
+          <i className="bi bi-arrow-left"></i>
         </button>
         <button
           className="btn btn-primary m-2"
@@ -71,7 +70,7 @@ function Dashboard({ date, setDate }) {
           className="btn btn-secondary m-2"
           onClick={() => history.push(`/dashboard?date=${next(date)}`)}
         >
-          <i class="bi bi-arrow-right"></i>
+          <i className="bi bi-arrow-right"></i>
         </button>
       </div>
       <div className="text-center mb-3">
