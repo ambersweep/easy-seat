@@ -53,7 +53,7 @@ export default function SearchForm() {
     <div>
       <ErrorAlert error={error} />
       <div className="row justify-content-between px-4">
-        <form className="col-lg-4" onSubmit={submitHandler}>
+        <form className="col-lg-4 m-2" onSubmit={submitHandler}>
           <input
             className="form-control"
             name="mobile_number"
@@ -69,7 +69,7 @@ export default function SearchForm() {
             Submit
           </button>
         </form>
-        <div className="col-lg-6 text-center">
+        <div className="col-lg-6 text-center m-2">
           {results ? searchResults : null}
         </div>
       </div>

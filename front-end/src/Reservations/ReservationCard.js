@@ -1,4 +1,5 @@
 import React from "react";
+import { updateStatus } from "../utils/api";
 
 export default function ReservationCard({ reservation }) {
   const {
@@ -13,7 +14,21 @@ export default function ReservationCard({ reservation }) {
 
   async function cancelHandler(event){
     event.preventDefault()
-      console.log("Pressed confirm")
+    const abort = new AbortController()
+    const message =
+    "Do you want to cancel this reservation? This cannot be undone.";
+    if(window.confirm(message)){
+      try {
+        await updateStatus(
+          reservation.reservation_id,
+          "cancelled",
+          abort.signal
+        );
+        window.location.reload(true);
+      } catch (error) {
+        if (error.name !== "AbortError") console.log(error)
+      }
+    }
   }
 
  const seatButton = (
@@ -22,6 +37,15 @@ export default function ReservationCard({ reservation }) {
   href={`/reservations/${reservation_id}/seat`}
 >
   Seat
+</a>
+ )
+
+ const editButton = (
+  <a
+  className="btn btn-secondary m-2"
+  href={`/reservations/${reservation_id}/edit`}
+>
+  Edit
 </a>
  )
 
@@ -40,41 +64,15 @@ export default function ReservationCard({ reservation }) {
             {" " + reservation_time}
           </p>
           {status !== "seated" ? seatButton : null}
-          <a
-            className="btn btn-secondary m-2"
-            href={`/reservations/${reservation_id}/edit`}
-          >
-            Edit
-          </a>
+          {status === "booked" ? editButton : null}
           <button
             className="btn btn-danger m-2"
-            data-toggle="modal" data-target="#cancelModal"
+            data-reservation-id-cancel={reservation.reservation_id}
+            onClick={cancelHandler}
           >
             Cancel
           </button>
         </div>
-
-      {/* Confirmation modal for cancelling reservation */}
-        <div className="modal fade" id="cancelModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog" role="document">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cancel Reservation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       Are you sure you would like to cancel this reservation?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick={cancelHandler} data-dismiss="modal">Ok</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
       </div>
     );
   }
