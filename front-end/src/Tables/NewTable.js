@@ -5,15 +5,15 @@ import ErrorAlert from "../layout/ErrorAlert";
 import TableForm from "./TableForm";
 
 export default function NewReservation() {
-  const initial = {
+  const initialForm = {
     table_name: "",
     capacity: 0,
   };
-  const [form, setForm] = useState(initial);
+  const [form, setForm] = useState(initialForm);
   const [showError, setShowError] = useState(false);
-  const abortController = new AbortController();
   const history = useHistory();
 
+  //when data is typed into form it updates form state
   function changeHandler({ target }) {
     const { name, value } = target;
     switch (name) {
@@ -25,27 +25,30 @@ export default function NewReservation() {
         break;
     }
   }
-
+  //when form is submitted it sends form data to api to create a new table, then returns to dashboard
   async function submitHandler(event) {
     event.preventDefault();
+    const abort = new AbortController();
     setShowError(false);
-    const newRes = {
-      table_name: form.table_name,
-      capacity: form.capacity,
-    };
     try {
-      await createTable(newRes, abortController.signal);
-      setForm(initial);
+      await createTable(
+        {
+          table_name: form.table_name,
+          capacity: form.capacity,
+        },
+        abort.signal
+      );
+      setForm(initialForm);
       history.push(`/dashboard`);
     } catch (error) {
       if (error.name !== "AbortError") setShowError(error);
     }
 
     return () => {
-      abortController.abort();
+      abort.abort();
     };
   }
-  
+
   return (
     <div>
       <div className="container p-2">

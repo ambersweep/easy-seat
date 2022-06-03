@@ -43,7 +43,6 @@ export default function SeatTable() {
   }, [reservation_id]);
 
   const tableSelection = tables.map((table) => {
-    const disabled = Number(table.capacity) < Number(reservations.people);
     return (
       <option key={table.table_id} value={table.table_id} disabled={Number(table.capacity) < Number(reservations.people) ? true : false}>
         {table.table_name} - {table.capacity}

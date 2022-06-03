@@ -51,15 +51,15 @@ export default function ReservationCard({ reservation }) {
 
   if (reservation) {
     return (
-      <div class="card mb-2">
-        <div class="card-body text-center">
-          <p class="card-text" data-reservation-id-status={reservation.reservation_id}>{status}</p>
-          <p class="card-text">
+      <div className="card mb-2">
+        <div className="card-body text-center">
+          <p className="card-text" data-reservation-id-status={reservation.reservation_id}>{status}</p>
+          <p className="card-text">
             Name: {first_name} {last_name}
           </p>
-          <p class="card-text">Mobile: {mobile_number}</p>
-          <p class="card-text">Party Size: {people}</p>
-          <p class="card-text">
+          <p className="card-text">Mobile: {mobile_number}</p>
+          <p className="card-text">Party Size: {people}</p>
+          <p className="card-text">
             Reservation Time:
             {" " + reservation_time}
           </p>

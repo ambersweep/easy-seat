@@ -114,20 +114,33 @@ function isValidDay(req, res, next) {
       message: "Reservations can only be created on a future date",
     });
   }
-  if (day === "Tuesday") {
+  else if (day === "Tuesday") {
     return next({
       status: 400,
       message: "Restaurant is closed on Tuesdays",
     });
   }
-  if (time <= "10:30" || time >= "21:30") {
+  else if (time <= "10:30") {
     return next({
       status: 400,
-      message: "Reservations can only be made from 10:30AM - 9:30PM.",
+      message: "The Restaurant opens at 10:30 AM",
+    });
+  }
+  else if(time >= "22:30") {
+    return next({
+      status: 400,
+      message: "The Restaurant closes at 10:30PM",
+    });
+  }
+  else if(time >= "21:30" && time <= "22:29" ) {
+    return next({
+      status: 400,
+      message: "The restaurant closes in less than an hour",
     });
   }
   next();
 }
+
 
 //List reservations
 async function list(req, res) {
