@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { createReservation, readReservation } from "../utils/api";
+import { readReservation, updateReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
@@ -16,10 +16,40 @@ export default function EditReservation(){
       };
       const [form, setForm] = useState({ ...initialForm });
       const [showError, setShowError] = useState(false);
-      const abortController = new AbortController();
+      const abort = new AbortController();
       const history = useHistory();
       const { reservation_id } = useParams();
       const resId = parseInt(reservation_id);
+
+      useEffect(()=> {
+        const abort = new AbortController();
+          const initialReservation = {
+              ...initialForm,
+              reservation_id : "",
+          }
+
+          async function fetchReservation() {
+              try {
+                const response = await readReservation(resId, abort.signal);
+                initialReservation.first_name = response.first_name;
+                initialReservation.last_name = response.last_name;
+                initialReservation.mobile_number = response.mobile_number;
+                initialReservation.people = parseInt(response.people);
+                initialReservation.reservation_id = parseInt(response.reservation_id);
+                initialReservation.reservation_date = formatDate(
+                  response.reservation_date
+                );
+                initialReservation.reservation_time = formatTime(
+                  response.reservation_time
+                );
+                setForm({ ...initialReservation });
+              } catch (error) {
+                  if (error.name !== "AbortError") setShowError(error)
+              }
+          }
+          fetchReservation()
+          return () => abort.abort();
+      }, [resId])
     
       function formatDate(date) {
         let formatedDate = date.split("");
@@ -56,25 +86,25 @@ export default function EditReservation(){
       async function submitHandler(event) {
         event.preventDefault();
         setShowError(false);
-        const newRes = {
+        const updatedRes = {
           first_name: form.first_name,
           last_name: form.last_name,
           mobile_number: form.mobile_number,
           people: Number(form.people),
+          reservation_id: resId,
           reservation_date: form.reservation_date,
           reservation_time: form.reservation_time,
           status: "booked",
         };
         try {
-          await createReservation(newRes, abortController.signal);
-          setForm(initialForm);
-          history.push(`/dashboard?date=${newRes.reservation_date}`);
+          await updateReservation(updatedRes, abort.signal);
+          history.push(`/dashboard?date=${updatedRes.reservation_date}`);
         } catch (error) {
           if (error.name !== "AbortError") setShowError(error);
         }
     
         return () => {
-          abortController.abort();
+          abort.abort();
         };
       }
       return (
@@ -84,7 +114,7 @@ export default function EditReservation(){
          </div>
     
           <div className="container fluid text-center">
-            <h3 className="my-3 font-monospace">Create A New Reservation</h3>
+            <h3 className="my-3 font-monospace">Edit Reservation</h3>
             <hr />
           </div>
           <div className="container fluid">
