@@ -1,7 +1,7 @@
 import React from "react";
 import { finishTable } from "../utils/api";
 
-export default function ReservationCard({ table }) {
+export default function TableCard({ table }) {
   const { table_name, capacity, table_id, reservation_id } = table;
 
 
