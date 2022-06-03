@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
@@ -16,8 +16,11 @@ export default function NewReservation() {
   };
   const [form, setForm] = useState({ ...initial });
   const [showError, setShowError] = useState(false);
-  const abortController = new AbortController();
   const history = useHistory();
+
+  useEffect(()=> {
+    setShowError(false)
+  },[form])
 
   function formatDate(date) {
     let formatedDate = date.split("");
@@ -52,6 +55,7 @@ export default function NewReservation() {
   }
 
   async function submitHandler(event) {
+    const abort = new AbortController()
     event.preventDefault();
     setShowError(false);
     const newRes = {
@@ -64,22 +68,24 @@ export default function NewReservation() {
       status: "booked",
     };
     try {
-      await createReservation(newRes, abortController.signal);
+      await createReservation(newRes, abort.signal);
       setForm(initial);
       history.push(`/dashboard?date=${newRes.reservation_date}`);
     } catch (error) {
-      if (error.name !== "AbortError") setShowError(error);
+      setShowError(await error);
     }
 
     return () => {
-      abortController.abort();
+      abort.abort();
     };
   }
+
+
   return (
     <div>
-      <div className="container p-2">
-     <ErrorAlert error={showError} />
-     </div>
+      <div className="container mt-2 text-center">
+      <ErrorAlert error={showError}/>
+    </div>
 
       <div className="container fluid text-center">
         <h3 className="my-3 font-monospace">Create A New Reservation</h3>

@@ -9,13 +9,7 @@ import React from "react";
  */
 
 function ErrorAlert({ error }) {
-  return (
-    error && (
-      <div className="alert alert-danger m-2">
-        <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;&nbsp;Error: {error.message}
-      </div>
-    )
-  );
+  return error && <p className="alert alert-danger m-2">{error.message}</p>;
 }
 
 export default ErrorAlert;

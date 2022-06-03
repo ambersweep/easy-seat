@@ -12,7 +12,7 @@ export default function ReservationForm({
       <form onSubmit={submitHandler}>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="first_name" class="form-label">
+            <label for="first_name" className="form-label">
               First Name:
             </label>
             <input
@@ -46,13 +46,12 @@ export default function ReservationForm({
         </div>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="mobile_number" class="form-label">
+            <label for="mobile_number" className="form-label">
               Phone Number:
             </label>
             <input
-              type="tel"
+              type="text"
               name="mobile_number"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               id="mobile_number"
               className="form-control"
               value={form["mobile_number"]}
@@ -115,11 +114,11 @@ export default function ReservationForm({
             className="btn btn-secondary m-2"
             onClick={() => history.goBack()}
           >
-            <i class="bi bi-x-lg"></i>
+            <i className="bi bi-x-lg"></i>
             &nbsp;Cancel
           </button>
           <button type="submit" className="btn btn-primary m-2">
-            <i class="bi bi-check-lg"></i>
+            <i className="bi bi-check-lg"></i>
             &nbsp;Submit
           </button>
         </div>
