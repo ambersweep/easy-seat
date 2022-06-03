@@ -12,7 +12,7 @@ export default function TableForm({
       <form onSubmit={submitHandler}>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="table_name" class="form-label">
+            <label htmlFor="table_name" className="form-label">
               Table Name:
             </label>
             <input
@@ -27,7 +27,7 @@ export default function TableForm({
             ></input>
           </div>
           <div className="col">
-            <label for="capacity" class="form-label">
+            <label htmlFor="capacity" className="form-label">
               Table Capacity:
             </label>
             <input
@@ -47,7 +47,7 @@ export default function TableForm({
             className="btn btn-secondary m-2"
             onClick={() => history.goBack()}
           >
-            <i class="bi bi-x-lg"></i>
+            <i className="bi bi-x-lg"></i>
             &nbsp;Cancel
           </button>
           <button type="submit" className="btn btn-primary m-2">

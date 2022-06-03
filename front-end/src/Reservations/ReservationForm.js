@@ -12,7 +12,7 @@ export default function ReservationForm({
       <form onSubmit={submitHandler}>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="first_name" className="form-label">
+            <label htmlFor="first_name" className="form-label">
               First Name:
             </label>
             <input
@@ -28,7 +28,7 @@ export default function ReservationForm({
             ></input>
           </div>
           <div className="col">
-            <label for="last_name" class="form-label">
+            <label htmlFor="last_name" className="form-label">
               Last Name:
             </label>
             <input
@@ -46,7 +46,7 @@ export default function ReservationForm({
         </div>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="mobile_number" className="form-label">
+            <label htmlFor="mobile_number" className="form-label">
               Phone Number:
             </label>
             <input
@@ -62,7 +62,7 @@ export default function ReservationForm({
             ></input>
           </div>
           <div className="col">
-            <label for="people" class="form-label">
+            <label htmlFor="people" className="form-label">
               Party Size:
             </label>
             <input
@@ -80,7 +80,7 @@ export default function ReservationForm({
         </div>
         <div className="row g-3 p-2">
           <div className="col">
-            <label for="reservation_date" class="form-label">
+            <label htmlFor="reservation_date" className="form-label">
               Reservation Date:
             </label>
             <input
@@ -95,7 +95,7 @@ export default function ReservationForm({
             ></input>
           </div>
           <div className="col">
-            <label for="reservation_time" class="form-label">
+            <label htmlFor="reservation_time" className="form-label">
               Reservation Time:
             </label>
             <input
