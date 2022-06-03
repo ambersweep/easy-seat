@@ -14,7 +14,9 @@ export default function SearchForm() {
 
   //resets search on page load
   useEffect(() => {
-    setForm(initialForm);
+    setForm({
+      mobile_number: "",
+    });
     setReservations([]);
     setShowResults(false);
   }, []);

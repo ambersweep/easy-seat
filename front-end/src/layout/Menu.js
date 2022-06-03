@@ -26,7 +26,7 @@ function Menu() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link active" to="/dashboard">
-              <i classNane="bi bi-speedometer2"></i>
+              <i className="bi bi-speedometer2"></i>
               &nbsp;Dashboard
             </Link>
           </li>
