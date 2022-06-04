@@ -10,7 +10,10 @@ import { Link } from "react-router-dom";
 function Menu() {
   return (
     <nav className="navbar navbar-dark main-navbar navbar-expand-md sticky-top shadow">
-      <a className="navbar-brand white-text" href="/">
+      <a
+        className="navbar-brand white-text position-absolute d-none d-md-block"
+        href="/"
+      >
         <b>Periodic Tables</b>
       </a>
       <button
@@ -22,10 +25,13 @@ function Menu() {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div
+        className="collapse navbar-collapse justify-content-center "
+        id="navbarSupportedContent"
+      >
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link active" to="/dashboard">
+            <Link className="nav-link" to="/dashboard">
               <i className="bi bi-speedometer2"></i>
               &nbsp;Dashboard
             </Link>

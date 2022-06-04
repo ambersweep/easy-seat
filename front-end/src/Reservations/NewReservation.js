@@ -82,7 +82,7 @@ export default function NewReservation() {
 
   return (
     <div>
-      <div className="container mt-2 text-center">
+      <div className="container p-1 text-center">
         <ErrorAlert error={showError} />
       </div>
 

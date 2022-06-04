@@ -51,7 +51,7 @@ export default function NewReservation() {
 
   return (
     <div>
-      <div className="container mt-2">
+      <div className="container p-1">
         <ErrorAlert error={showError} />
       </div>
       <div className="container fluid text-center">
