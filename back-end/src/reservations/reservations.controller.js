@@ -93,50 +93,51 @@ function isBooked(req, res, next) {
   next();
 }
 
-//VALIDATION: Valid reservation day
-function isValidDay(req, res, next) {
-  const { data } = req.body;
+//VALIDATION: Valid reservation date
+function hasFutureWorkingDate(req, res, next) {
+  const { reservation_date, reservation_time } = req.body.data;
   const reservationDate = new Date(
-    `${data.reservation_date} ${data.reservation_time}`
+      `${reservation_date}T${reservation_time}:00Z`
   );
-  let day = days[reservationDate.getDay()];
-  let time = data.reservation_time;
-  if (reservationDate < new Date() && day === "Tuesday") {
-    return next({
-      status: 400,
-      message:
-        "Reservations can only be created on a future date, excluding Tuesdays",
-    });
+  res.locals.time = reservationDate;
+  const today = new Date();
+  if (isNaN(reservationDate.getDate())) {
+      next({
+          message: `reservation_date / reservation_time incorrect`,
+          status: 400,
+      });
   }
-  if (reservationDate < new Date()) {
-    return next({
-      status: 400,
-      message: "Reservations can only be created on a future date",
-    });
+
+  if (reservationDate.getUTCDay() == 2) {
+      next({
+          message: "Restaurant is closed on tuesdays",
+          status: 400,
+      });
   }
-  else if (day === "Tuesday") {
-    return next({
-      status: 400,
-      message: "Restaurant is closed on Tuesdays",
-    });
+
+  if (reservationDate < today) {
+      next({
+          message: "Reservation needs to be in the future",
+          status: 400,
+      });
   }
-  else if (time <= "10:30") {
-    return next({
-      status: 400,
-      message: "The Restaurant opens at 10:30 AM",
-    });
-  }
-  else if(time >= "22:30") {
-    return next({
-      status: 400,
-      message: "The Restaurant closes at 10:30PM",
-    });
-  }
-  else if(time >= "21:30" && time <= "22:29" ) {
-    return next({
-      status: 400,
-      message: "The restaurant closes in less than an hour",
-    });
+  next();
+}
+
+//checks time against UTC time to make sure it is correct
+function hasEligibleTime(req, res, next) {
+  let hours = res.locals.time.getUTCHours();
+  let minutes = res.locals.time.getUTCMinutes();
+  if (
+      hours < 10 ||
+      (hours == 10 && minutes < 30) ||
+      hours > 21 ||
+      (hours == 21 && minutes > 30)
+  ) {
+      next({
+          message: "Please select a time between 10:30 and 21:30",
+          status: 400,
+      });
   }
   next();
 }
@@ -228,7 +229,8 @@ function validStatus(req, res, next) {
 module.exports = {
   create: [
     hasValidProperties,
-    isValidDay,
+    hasFutureWorkingDate,
+    hasEligibleTime,
     isBooked,
     asyncErrorBoundary(create),
   ],
@@ -237,6 +239,8 @@ module.exports = {
   update: [
     asyncErrorBoundary(reservationExists),
     hasValidProperties,
+    hasFutureWorkingDate,
+    hasEligibleTime,
     asyncErrorBoundary(update),
   ],
   updateStatus: [
