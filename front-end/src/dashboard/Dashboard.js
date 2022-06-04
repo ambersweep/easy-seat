@@ -43,7 +43,7 @@ function Dashboard({ date, setDate }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables(abortController.signal).then(setTables)
+    listTables(abortController.signal).then(setTables);
     return () => abortController.abort();
   }
 
@@ -61,7 +61,7 @@ function Dashboard({ date, setDate }) {
           <i className="bi bi-arrow-left"></i>
         </button>
         <button
-          className="btn btn-primary m-2"
+          className="btn-purple m-2"
           onClick={() => history.push(`/dashboard?date=${today()}`)}
         >
           Today
@@ -73,21 +73,26 @@ function Dashboard({ date, setDate }) {
           <i className="bi bi-arrow-right"></i>
         </button>
       </div>
-      <div className="text-center mb-3">
-        <h4>Reservations for {date}</h4>
-      </div>
-      <div className="container">
-        <ErrorAlert error={reservationsError} />
-      </div>
-      <div className="container">
-        <ListReservations reservations={reservations} />
-      </div>
-      <br />
-      <div className="text-center mb-3">
-        <h4>Tables</h4>
-      </div>
-      <div className="container text-center">
-        <TableList tables={tables} />
+      <div className="row justify-content-center px-4">
+        <div className="col-lg-4 m-2">
+          <div className="text-center mb-3">
+            <h4>Reservations for {date}</h4>
+          </div>
+          <div className="container">
+            <ErrorAlert error={reservationsError} />
+          </div>
+          <div className="container">
+            <ListReservations reservations={reservations} />
+          </div>
+        </div>
+        <div className="col-lg-4 text-center m-2">
+          <div className="text-center mb-3">
+            <h4>Tables</h4>
+          </div>
+          <div className="container text-center">
+            <TableList tables={tables} />
+          </div>
+        </div>
       </div>
     </main>
   );
