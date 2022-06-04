@@ -10,7 +10,7 @@ export default function SearchForm() {
   const [form, setForm] = useState(initialForm);
   const [reservations, setReservations] = useState([]);
   const [error, setError] = useState(null);
-  const [results, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   //resets search on page load
   useEffect(() => {
@@ -64,15 +64,12 @@ export default function SearchForm() {
             onChange={changeHandler}
             required
           ></input>
-          <button
-            className="btn btn-primary mt-2 col text-center"
-            type="submit"
-          >
+          <button className="btn-purple mt-2 col text-center" type="submit">
             Submit
           </button>
         </form>
         <div className="col-lg-6 text-center m-2">
-          {results ? searchResults : null}
+          {showResults ? searchResults : null}
         </div>
       </div>
     </div>

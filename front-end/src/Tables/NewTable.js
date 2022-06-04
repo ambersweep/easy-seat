@@ -51,12 +51,11 @@ export default function NewReservation() {
 
   return (
     <div>
-      <div className="container p-2">
+      <div className="container mt-2">
         <ErrorAlert error={showError} />
       </div>
-
       <div className="container fluid text-center">
-        <h3 className="my-3 font-monospace">Create A New Table</h3>
+        <h3 className="my-3">Create A New Table</h3>
         <hr />
       </div>
       <div className="container fluid">

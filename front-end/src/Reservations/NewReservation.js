@@ -18,9 +18,9 @@ export default function NewReservation() {
   const [showError, setShowError] = useState(false);
   const history = useHistory();
 
-  useEffect(()=> {
-    setShowError(false)
-  },[form])
+  useEffect(() => {
+    setShowError(false);
+  }, [form]);
 
   function formatDate(date) {
     let formatedDate = date.split("");
@@ -55,7 +55,7 @@ export default function NewReservation() {
   }
 
   async function submitHandler(event) {
-    const abort = new AbortController()
+    const abort = new AbortController();
     event.preventDefault();
     setShowError(false);
     const newRes = {
@@ -80,12 +80,11 @@ export default function NewReservation() {
     };
   }
 
-
   return (
     <div>
       <div className="container mt-2 text-center">
-      <ErrorAlert error={showError}/>
-    </div>
+        <ErrorAlert error={showError} />
+      </div>
 
       <div className="container fluid text-center">
         <h3 className="my-3 font-monospace">Create A New Reservation</h3>

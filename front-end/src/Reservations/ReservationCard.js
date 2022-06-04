@@ -33,7 +33,7 @@ export default function ReservationCard({ reservation }) {
 
  const seatButton = (
   <a
-  className="btn btn-primary m-2"
+  className="btn-purple m-2"
   href={`/reservations/${reservation_id}/seat`}
 >
   Seat
@@ -51,9 +51,12 @@ export default function ReservationCard({ reservation }) {
 
   if (reservation) {
     return (
-      <div className="card mb-2">
+      <div className="card mb-3">
+        <div className="card-header text-center">
+        <p className="card-text" data-reservation-id-status={reservation.reservation_id}>Status: {status}</p>
+        </div>
         <div className="card-body text-center">
-          <p className="card-text" data-reservation-id-status={reservation.reservation_id}>{status}</p>
+         
           <p className="card-text">
             Name: {first_name} {last_name}
           </p>
@@ -66,7 +69,7 @@ export default function ReservationCard({ reservation }) {
           {status !== "seated" ? seatButton : null}
           {status === "booked" ? editButton : null}
           <button
-            className="btn btn-danger m-2"
+            className="btn btn-dark m-2"
             data-reservation-id-cancel={reservation.reservation_id}
             onClick={cancelHandler}
           >
