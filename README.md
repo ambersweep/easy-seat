@@ -1,70 +1,99 @@
-# Restaurant Reservation System
+# easy seat - Restaurant Reservation System
+
+<a name="intro"/>
+
+### Introduction
+
+easy seat is a restaurant booking system and table manager. Users can view, create, edit, and delete reservations. Users can also search reservations by phone number. Users can create new tables, seat reservations at them, and also delete the table.  
 
 [✨ Live Demo Link](https://reservation-system-front-end.vercel.app/dashboard)
 
-## Existing files
+### Table of Contents  
+- [Introduction](#intro)
+- [Tech Stack](#tech)  
+- [Features](#features)
+  - [Reservations](#reservations)
+  - [Tables](#tables)
+- [Custom Database Setup](#database)
+- [Local Installation Instructions](#install)
 
-This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
+<a name="tech"/>
 
-As you work through the user stories listed later in this document, you will be writing code that allows your frontend and backend applications to talk to each other. You will also write code to allow your controllers and services to connect to, and query, your PostgreSQL database via [Knex](http://knexjs.org/).
+## Tech Stack
 
-The table below describes the folders in this starter repository:
+**Frontend**
+ - React JS
+ - HTML
+ - CSS
+ - Bootstrap 5
+ 
+ **Backend**
+ - PostgreSQL
+ - Express JS
+ - Knex JS
+ - CORS
 
-| Folder/file path | Description                                                      |
-| ---------------- | ---------------------------------------------------------------- |
-| `./back-end`     | The backend project, which runs on `localhost:5001` by default.  |
-| `./front-end`    | The frontend project, which runs on `localhost:3000` by default. |
+<a name="features"/>
 
-This starter code closely follows the best practices and patterns established in the Robust Server Structure module.
+## Features
 
-**Note**: Please do not submit a pull request to this repository with your solution.
+<a name="reservations"/>
 
-### Backend Existing files
+### Reservations
 
-The `./back-end` folder contains all the code for the backend project.
+### Create a new reservation
+You can create a new reservation by clicking on ```+ New Reservation``` on the top of the page, or by clicking on the ```+``` next to the reservations list. Each reservation requires a first name, last name, phone number, party size, reservation time, and reservation date.
 
-The table below describes the existing files in the `./back-end` folder:
+> Trying to create a reservation with an empty feild, at a date in the past, after the restaurant closes, or less than an hour before the restaurant closes will return an error.
 
-| Folder/file path                                         | Description                                                                                                         |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `./back-end/knexfile.js`                                 | The Knex configuration file. You will not need to make changes to this file.                                        |
-| `./back-end/src/app.js`                                  | Defines the Express application and connects routers.                                                               |
-| `./back-end/src/db/connection.js`                        | The Knex connection file. You will not need to make changes to this file.                                           |
-| `./back-end/src/db/migrations`                           | The Knex migrations folder.                                                                                         |
-| `./back-end/src/db/seeds/`                               | The Knex seeds folder.                                                                                              |
-| `./back-end/src/errors/errorHandler.js`                  | Defined an Express API error handler.                                                                               |
-| `./back-end/src/errors/notFound.js`                      | Defined an Express API "not found" handler.                                                                         |
-| `./back-end/src/reservations/reservations.controller.js` | A controller for the reservations resource.                                                                         |
-| `./back-end/src/reservations/reservations.router.js`     | A router for the reservations resource.                                                                             |
-| `./back-end/src/server.js`                               | Defines the node server.                                                                                            |
-| `./back-end/test`                                        | A folder that contains all of the integration tests. You will not need to make changes to the files in this folder. |
-| `./back-end/vercel.json`                                 | A vercel deployment configuration file. You will not need to make changes to this file.                             |
+![Imgur](https://i.imgur.com/MZ5ffpm.gif)
 
-### Frontend Existing files
+### Seat a reservation
+To seat a reservation, click on the ```Seat``` button on the bottom of the reservation card. This will bring you to the Seat Table page where you can select a table.
 
-The `./front-end` folder contains all the code for the frontend project.
+After seating the reservation, the table status will be updated to "Occupied" and the reservation status will be updated to "Seated"
 
-The table below describes the existing files in the `./front-end` folder:
+> If the party size on the reservation is too big for a certain table, the option for that table will be disabled on the dropdown list.
 
-| Folder/file path                                   | Description                                                                                            |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `./front-end/e2e`                                  | Contains all of the end-to-end tests. You will not need to make changes to the files in this folder.   |
-| `./front-end/jest-puppeteer.config.js`             | A configuration file used by the end-to-end tests. You will not need to make changes to this file.     |
-| `./front-end/src/App.js`                           | Defines the root application component. You will not need to make changes to this file.                |
-| `./front-end/src/App.test.js`                      | Contains the tests for the root application component. You will not need to make changes to this file. |
-| `./front-end/src/dashboard/Dashboard.js`           | Defines the Dashboard page.                                                                            |
-| `./front-end/src/index.js`                         | The main entry point for the React application.                                                        |
-| `./front-end/src/layout/ErrorAlert.js`             | Defines an error alert component that display only when an error is specified.                         |
-| `./front-end/src/layout/Layout.css`                | The css for the Layout component.                                                                      |
-| `./front-end/src/layout/Layout.js`                 | Defines the main layout of the application.                                                            |
-| `./front-end/src/layout/Menu.js`                   | Defines the menu for the application.                                                                  |
-| `./front-end/src/layout/NotFound.js`               | Defines the "Not found" component that is displayed when no route matches.                             |
-| `./front-end/src/layout/Routes.js`                 | Defines all the routes for the application.                                                            |
-| `./front-end/src/utils/api.js`                     | Defines the functions used to access the backend API                                                   |
-| `./front-end/src/utils/date-time.js`               | Defines functions to format date and time strings.                                                     |
-| `./front-end/src/utils/format-reservation-date.js` | Defines a function to format the date on a single reservation or an array of reservations.             |
-| `./front-end/src/utils/format-reservation-time.js` | Defines a function to format the time on a single reservation or an array of reservations.             |
-| `./front-end/src/utils/useQuery.js`                | Defines a custom hook to parse the query parameters from the URL.                                      |
+![Imgur](https://i.imgur.com/FuIwIzN.gif)
+
+### Edit a reservation
+You can edit a reservation by clicking on the ```Edit``` button on the bottom of the reservation card. This will open the Edit Reservation Page which is prefilled with the reservation info. All fields can be edited here.
+
+![Imgur](https://i.imgur.com/ZTbQnxU.gif)
+
+### Cancel a reservation
+To cancel a reservation, click on the ```cancel``` button on the bottom of the reservation card. Cancelling a reservation will change its status to "Cancelled".
+
+![Imgur](https://i.imgur.com/M5DO7ab.gif)
+
+### Search Reservations
+To search for a reservation, click on ```Search``` on the navbar. This will bring you to the Search Reservations page. To find reservations, you can enter a partial or full number. This will bring up all reservations that contain that number regardless of its current status. 
+
+![Imgur](https://i.imgur.com/90IyFrP.gif)
+
+<a name="tables"/>
+
+### Tables
+
+### Create a Table
+You can create a new table by clicking on ```+ New Table``` on the top of the page, or by clicking on the ```+``` next to the tables list. A table requires a name and capacity. 
+
+![Imgur](https://i.imgur.com/jhUVyvj.gif)
+
+### Finish table
+To free a table for a new reservation, click on the ```Finish``` button below the table. Afterwards the tables status will be updated to "Free" and it can seat a new reservation. 
+
+![Imgur](https://i.imgur.com/xKSfEtF.gif)
+
+### Delete a table
+You can delete a table permanantly by clicking on the trash icon next to the table's title. 
+
+> A table that is currently occupied cannot be deleted.
+
+![Imgur](https://i.imgur.com/00ULOft.gif)
+
+<a name="database"/>
 
 ## Database setup
 
@@ -74,6 +103,8 @@ The table below describes the existing files in the `./front-end` folder:
 ### Knex
 
 Run `npx knex` commands from within the `back-end` folder, which is where the `knexfile.js` file is located.
+
+<a name="install"/>
 
 ## Installation
 
