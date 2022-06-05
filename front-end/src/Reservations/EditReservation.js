@@ -115,13 +115,13 @@ export default function EditReservation() {
   }
   return (
     <div>
-      <div className="container p-2">
+      <div className="container p-1">
         <ErrorAlert error={showError} />
       </div>
 
       <div className="container fluid text-center">
         <h3 className="my-3 font-monospace">Edit Reservation</h3>
-        <hr />
+        <br />
       </div>
       <div className="container fluid">
         <ReservationForm

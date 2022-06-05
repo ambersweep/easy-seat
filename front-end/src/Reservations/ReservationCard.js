@@ -51,8 +51,8 @@ export default function ReservationCard({ reservation }) {
 
   if (reservation) {
     return (
-      <div className="card mb-3">
-        <div className="card-header text-center">
+      <div className="card mb-3 shadow-sm">
+        <div className="card-header p-4 text-center">
         <p className="card-text" data-reservation-id-status={reservation.reservation_id}>Status: {status}</p>
         </div>
         <div className="card-body text-center">

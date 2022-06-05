@@ -13,9 +13,9 @@ import "./Layout.css";
  */
 function Layout() {
   return (
-    <div>
+    <div className="text-poppins">
       <div className="row-md-2">
-        <div>
+        <div className="sticky-top">
       <Menu/>
         </div>
         <div>

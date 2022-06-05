@@ -56,7 +56,7 @@ export default function NewReservation() {
       </div>
       <div className="container fluid text-center">
         <h3 className="my-3">Create A New Table</h3>
-        <hr />
+        <br />
       </div>
       <div className="container fluid">
         <TableForm

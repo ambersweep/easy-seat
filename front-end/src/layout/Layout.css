@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&&display=swap');
+
 .side-bar {
   background-color: #393a44;
   min-width: 200px;
@@ -14,6 +16,14 @@ nav{
 .purple{
   background-color:  rgb(90, 80, 161);
   color: white;
+}
+
+.text-purple {
+  color:  rgb(90, 80, 161);
+}
+
+.text-purple:hover{
+ color:  rgb(65, 59, 117);
 }
 
 .btn-purple {
@@ -75,4 +85,8 @@ border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 .btn-purple:link {
   text-decoration: none;
+}
+
+.text-poppins {
+  font-family: 'Poppins', sans-serif;
 }
