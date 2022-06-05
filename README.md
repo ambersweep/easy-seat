@@ -1,4 +1,4 @@
-# easy seat - Restaurant Reservation System
+#  🍽️ easy seat - Restaurant Reservation System
 
 <a name="intro"/>
 
