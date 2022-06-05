@@ -126,6 +126,17 @@ function tableIsOccupied(req, res, next) {
   next();
 }
 
+function tableIsNotOccupied(req, res, next) {
+  let table = res.locals.table;
+  if (table.reservation_id !== null) {
+    next({
+      message: "this table is occupied",
+      status: 400,
+    });
+  }
+  next();
+}
+
 async function changeStatus(req, res, next) {
   if (req.method == "DELETE") {
     let table = res.locals.table;
@@ -147,6 +158,12 @@ function reservationIsBooked(req, res, next) {
     });
   }
   next();
+}
+
+async function destroy(req, res) {
+  const { table } = res.locals;
+  await service.delete(table.table_id);
+  res.sendStatus(204);
 }
 
 module.exports = {
@@ -172,4 +189,9 @@ module.exports = {
     asyncErrorBoundary(changeStatus, 400),
     asyncErrorBoundary(update, 400),
   ],
+  destroy: [
+    asyncErrorBoundary(tableExists),
+    tableIsNotOccupied,
+    asyncErrorBoundary(destroy),
+  ]
 };

@@ -40,6 +40,10 @@ function changeStatus(reservation_id, newStatus) {
     .update({ status: newStatus });
 }
 
+function destroy(tableId) {
+  return knex("tables").where({ table_id: tableId }).del();
+}
+
 module.exports = {
   read,
   list,
@@ -48,4 +52,5 @@ module.exports = {
   getTable,
   getReservation,
   changeStatus,
+  delete: destroy,
 };

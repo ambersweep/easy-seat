@@ -6,7 +6,7 @@ export default function Search() {
     <div>
       <div className="container fluid p-1 text-center">
         <h3 className="my-3 font-monospace">Search For A Reservation</h3>
-        <hr />
+        <br />
       </div>
       <div className="container">
         <br />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch, Link } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
@@ -51,7 +51,7 @@ function Dashboard({ date, setDate }) {
     <main>
       <h2 className="text-center mt-4">Dashboard</h2>
       <div className="container">
-        <hr />
+      <br/>
       </div>
       <div className="container text-center mb-2">
         <button
@@ -76,7 +76,7 @@ function Dashboard({ date, setDate }) {
       <div className="row justify-content-center px-4">
         <div className="col-lg-4 m-2">
           <div className="text-center mb-3">
-            <h4>Reservations for {date}</h4>
+            <h4>Reservations for {date} <Link className="text-purple" to="/reservations/new"><b><i className="bi bi-plus-lg"></i></b></Link></h4>
           </div>
           <div className="container">
             <ErrorAlert error={reservationsError} />
@@ -86,8 +86,8 @@ function Dashboard({ date, setDate }) {
           </div>
         </div>
         <div className="col-lg-4 text-center m-2">
-          <div className="text-center mb-3">
-            <h4>Tables</h4>
+          <div className="text-center text-poppins mb-3">
+            <h4>Tables <Link className="text-purple" to="/tables/new"><b><i className="bi bi-plus-lg"></i></b></Link></h4>
           </div>
           <div className="container text-center">
             <TableList tables={tables} />

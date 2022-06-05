@@ -88,7 +88,7 @@ export default function NewReservation() {
 
       <div className="container fluid text-center">
         <h3 className="my-3 font-monospace">Create A New Reservation</h3>
-        <hr />
+        <br />
       </div>
       <div className="container fluid">
         <ReservationForm

@@ -60,7 +60,7 @@ export default function SearchForm() {
             className="form-control"
             name="mobile_number"
             type="search"
-            placeholder="Enter a customer's phone number"
+            placeholder="Enter a phone number"
             onChange={changeHandler}
             required
           ></input>

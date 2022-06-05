@@ -14,7 +14,7 @@ router
   .post(controller.create)
   .all(methodNotAllowed);
 
-router.route("/:tableId").get(controller.read).all(methodNotAllowed);
+router.route("/:tableId").get(controller.read).delete(controller.destroy).all(methodNotAllowed);
 
 router
   .route("/:tableId/seat")
